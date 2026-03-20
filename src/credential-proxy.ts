@@ -81,8 +81,8 @@ export function startCredentialProxy(
 
         const upstreamPath =
           upstreamUrl.pathname === '/'
-            ? req.url
-            : upstreamUrl.pathname + req.url;
+            ? (req.url ?? '/')
+            : upstreamUrl.pathname.replace(/\/$/, '') + req.url;
         const upstream = makeRequest(
           {
             hostname: upstreamUrl.hostname,
